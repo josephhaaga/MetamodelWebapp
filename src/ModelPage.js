@@ -45,7 +45,7 @@ class ModelPage extends Component {
            style={{marginBottom: "1rem"}}>
             <a
               onClick={this.props.return}
-              style={{color:"lightgray"}}>&larr; Back to model list</a>
+              style={{color:"lightgray", fontSize: "14px"}}>&larr; Back to model list</a>
           </div>
           <div className="cell medium-12">
             <div className="grid-x">
