@@ -6,6 +6,7 @@ class App extends Component {
   constructor(props){
     super(props)
     this.navigate = this.navigate.bind(this);
+    this.returnHome = this.returnHome.bind(this);
     this.state = {
       homePage: true
     }
@@ -13,6 +14,11 @@ class App extends Component {
   navigate(){
     this.setState({
       homePage: false
+    })
+  }
+  returnHome(){
+    this.setState({
+      homePage: true
     })
   }
   render() {
@@ -29,7 +35,7 @@ class App extends Component {
           </div>
         )
       : (
-          <ModelPage />
+          <ModelPage return={this.returnHome} />
         )
     )
     return (

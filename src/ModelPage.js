@@ -6,7 +6,17 @@ class ModelPage extends Component {
     super(props)
     this.increment = this.increment.bind(this)
     this.decrement = this.decrement.bind(this)
-    this.data = [0, 1, 2] // load JSON file here
+    this.data = [
+      {
+        gist: '4ca633e244d5eb5e10246db6b9879e62',
+        graph: '/assets/createNodes.jpg'
+      }, {
+        gist: '40627a247ac785b610f12caa25dabe00',
+        graph: '/assets/createEdges.jpg'
+      }, {
+        gist: '4789af32d8a408524a68473a7997f3fb',
+        graph: '/assets/createHyperedges.jpg'
+      }]
     this.state = {
       step: 0
     }
@@ -14,7 +24,7 @@ class ModelPage extends Component {
 
   increment(){
     this.setState({
-      step: Math.min(this.data.length, this.state.step + 1)
+      step: Math.min(this.data.length - 1, this.state.step + 1)
     })
   }
   decrement(){
@@ -24,9 +34,19 @@ class ModelPage extends Component {
   }
 
   render(){
+
+    const gistUrl = this.data[this.state.step]['gist'];
+    const graphUrl = this.data[this.state.step]['graph'];
+    // const graphUrl = ;
     return (
       <div className="cell medium-12">
         <div className="grid-x">
+          <div className="cell medium-12"
+           style={{marginBottom: "1rem"}}>
+            <a
+              onClick={this.props.return}
+              style={{color:"lightgray"}}>&larr; Back to model list</a>
+          </div>
           <div className="cell medium-12">
             <div className="grid-x">
               <div className="cell medium-8">
@@ -45,10 +65,14 @@ class ModelPage extends Component {
           </div>
           <div className="cell medium-6">
             <div className="the-code">
-              <Gist id='4ca633e244d5eb5e10246db6b9879e62' />
+              <Gist id={gistUrl} />
             </div>
           </div>
-          <div className="cell medium-6">Diagram goes here</div>
+          <div className="cell medium-6">
+            <img
+             src={graphUrl}
+             style={{width: "100%"}} />
+          </div>
         </div>
       </div>
     );
