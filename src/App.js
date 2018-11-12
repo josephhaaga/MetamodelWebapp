@@ -1,24 +1,45 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { ModelPage } from './ModelPage';
 
 class App extends Component {
+  constructor(props){
+    super(props)
+    this.navigate = this.navigate.bind(this);
+    this.state = {
+      homePage: true
+    }
+  }
+  navigate(){
+    this.setState({
+      homePage: false
+    })
+  }
   render() {
+    const screen = (this.state.homePage
+      ? (
+          <div className="cell medium-8">
+            <h2>Models</h2>
+            <ul>
+              <li><a onClick={this.navigate}>Malfeasance Community Detection</a></li>
+              <li><a onClick={this.navigate}>Ghost Preparers</a></li>
+              <li><a onClick={this.navigate}>Dependent Claims</a></li>
+              <li><a onClick={this.navigate}>PTIN-EIN Matching</a></li>
+            </ul>
+          </div>
+        )
+      : (
+          <ModelPage />
+        )
+    )
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
+          <div className="grid-container" style={{width: "100%"}}>
+            <div className="grid-x">
+              {screen}
+            </div>
+          </div>
         </header>
       </div>
     );
