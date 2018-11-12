@@ -9,13 +9,13 @@ class ModelPage extends Component {
     this.data = [
       {
         gist: '4ca633e244d5eb5e10246db6b9879e62',
-        graph: '/assets/createNodes.jpg'
+        graph: 'assets/createNodes.jpg'
       }, {
         gist: '40627a247ac785b610f12caa25dabe00',
-        graph: '/assets/createEdges.jpg'
+        graph: 'assets/createEdges.jpg'
       }, {
         gist: '4789af32d8a408524a68473a7997f3fb',
-        graph: '/assets/createHyperedges.jpg'
+        graph: 'assets/createHyperedges.jpg'
       }]
     this.state = {
       step: 0
