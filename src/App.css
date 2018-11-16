@@ -38,3 +38,11 @@
   padding: .125rem .0rem .0625rem;
   font-size: 16px;
 }
+
+.set-of-ops > li {
+  font-size: 16px;
+}
+
+.accordion-item.is-active > div {
+  display: block;
+}

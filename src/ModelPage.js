@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import Gist from 'react-gist';
+import { NewStepDialogue } from './NewStepDialogue.js';
 
 class ModelPage extends Component {
   constructor(props){
     super(props)
     this.increment = this.increment.bind(this)
     this.decrement = this.decrement.bind(this)
+    this.forkModel = this.forkModel.bind(this)
     this.data = [
       {
         gist: '4ca633e244d5eb5e10246db6b9879e62',
@@ -18,10 +20,19 @@ class ModelPage extends Component {
         graph: 'assets/createHyperedges.jpg'
       }]
     this.state = {
-      step: 0
+      step: 0,
+      forked: false
     }
   }
-
+  forkModel(){
+    this.data = this.data.splice(0, this.state.step + 1)
+    this.data.push({graph: this.data[this.state.step].graph})
+    console.log(this.data);
+    this.setState({
+      forked: true,
+      step: this.state.step + 1
+    })
+  }
   increment(){
     this.setState({
       step: Math.min(this.data.length - 1, this.state.step + 1)
@@ -34,10 +45,13 @@ class ModelPage extends Component {
   }
 
   render(){
-
-    const gistUrl = this.data[this.state.step]['gist'];
-    const graphUrl = this.data[this.state.step]['graph'];
-    // const graphUrl = ;
+    const thisStep = this.data[this.state.step];
+    // const gistUrl = thisStep['gist'];
+    const graphUrl = thisStep['graph'];
+    const leftHandSide = (('gist' in thisStep)
+      ? <Gist id={thisStep['gist']} />
+      : <NewStepDialogue />
+    )
     return (
       <div className="cell medium-12">
         <div className="grid-x">
@@ -58,14 +72,15 @@ class ModelPage extends Component {
                 </div>
               </div>
               <div className="cell medium-4">
-                <button class="button fork">Fork this model</button>
+                <button className="button fork"
+                  onClick={this.forkModel}>Fork this model</button>
               </div>
             </div>
             <h2>Step {this.state.step + 1}</h2>
           </div>
           <div className="cell medium-6">
             <div className="the-code">
-              <Gist id={gistUrl} />
+              {leftHandSide}
             </div>
           </div>
           <div className="cell medium-6">
