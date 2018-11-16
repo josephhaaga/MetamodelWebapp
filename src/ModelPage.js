@@ -27,7 +27,6 @@ class ModelPage extends Component {
   forkModel(){
     this.data = this.data.splice(0, this.state.step + 1)
     this.data.push({graph: this.data[this.state.step].graph})
-    console.log(this.data);
     this.setState({
       forked: true,
       step: this.state.step + 1

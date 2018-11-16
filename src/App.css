@@ -46,3 +46,11 @@
 .accordion-item.is-active > div {
   display: block;
 }
+
+.accordion-item.disabled {
+  background: lightgray;
+}
+.accordion-item.disabled a{
+  cursor: not-allowed;
+  color: gray;
+}

@@ -37,20 +37,27 @@ class NewStepDialogue extends Component {
       active: 0
     }
   }
-  setActive(e){
-    console.log(e.target);
+  setActive(idx){
+    console.log(idx);
+    this.setState({
+      active: idx
+    })
   }
   render(){
+    const activeIdx = this.state.active
     const opsPanels = this.data.map((x, idx) => {
-      const status = ((idx == this.state.active) ? 'is-active' : '');
-      const panelContent = x.operations.map(y => {
+      const status = ((idx === activeIdx && !x.disabled) ? 'is-active' : '');
+      const disabled = ((x.disabled) ? 'disabled' : '');
+      const panelContent = x.operations.map((y, idx2) => {
         return (
-          <li>{y}</li>
+          <li key={idx2}>{y}</li>
         )
       })
+      const theIndex = idx;
+      const callbackFn = this.setActive
       return (
-        <li key={idx} className={"accordion-item "+status} data-accordion-item>
-          <a onClick={(e) => this.setActive(e)} href="#" className="accordion-title">{x.src} &rarr; {x.dst}</a>
+        <li key={idx} className={"accordion-item "+status+" "+disabled} data-accordion-item>
+          <a onClick={() => callbackFn(theIndex)} href="#" className="accordion-title">{x.src} &rarr; {x.dst}</a>
           <div className="accordion-content" data-tab-content>
             <ul className="set-of-ops">
               {panelContent}
