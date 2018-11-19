@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
+import { OneHop } from './OneHop';
 
 class NewStepDialogue extends Component {
   constructor(props){
     super(props)
     this.setActive = this.setActive.bind(this)
+    this.doOperation = this.doOperation.bind(this)
     this.data = [
       {
         src: "DF",
@@ -34,8 +36,14 @@ class NewStepDialogue extends Component {
       },
     ]
     this.state = {
-      active: 0
+      active: 0,
+      newOperationSelected: false
     }
+  }
+  doOperation(){
+    this.setState({
+      newOperationSelected: true
+    })
   }
   setActive(idx){
     console.log(idx);
@@ -44,13 +52,14 @@ class NewStepDialogue extends Component {
     })
   }
   render(){
+    const doOperation = this.doOperation;
     const activeIdx = this.state.active
     const opsPanels = this.data.map((x, idx) => {
       const status = ((idx === activeIdx && !x.disabled) ? 'is-active' : '');
       const disabled = ((x.disabled) ? 'disabled' : '');
       const panelContent = x.operations.map((y, idx2) => {
         return (
-          <li key={idx2}>{y}</li>
+          <li key={idx2}><a href="#" onClick={y => doOperation(y)}>{y}</a></li>
         )
       })
       const theIndex = idx;
@@ -66,11 +75,13 @@ class NewStepDialogue extends Component {
         </li>
       )
     })
-    const newStep = ((true)
-      ? <ul className="accordion" data-accordion>
+    const newStep = ((this.state.newOperationSelected)
+      ? <div>
+          <OneHop name="One-Hop"/>
+        </div>
+      : <ul className="accordion" data-accordion>
           {opsPanels}
         </ul>
-      : null
     )
     return (
       <div className="new-step">

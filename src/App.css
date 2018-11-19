@@ -54,3 +54,16 @@
   cursor: not-allowed;
   color: gray;
 }
+
+
+.static .accordion-title{
+  background: #e6e6e6;
+  margin-bottom: 0;
+  font-size: 20px;
+}
+.static .accordion-title::before{
+  content: "";
+}
+.static .accordion-content{
+  display: block;
+}
