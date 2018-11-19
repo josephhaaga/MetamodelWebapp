@@ -7,8 +7,8 @@ class OneHop extends Component {
       motif: "(a)-[r1]->(b); (c)-[r2]->(b); (a) != (c)",
       transform: "(a)-[r3]->(c)",
       parameterTypes: {
-        vertex: ["Person", "Company"],
-        edge: ["claims_dependent", "owned_by", "employed_by"]
+        vertex: ["Vertex", "Person", "Company"],
+        edge: ["Edge", "claims_dependent", "owned_by", "employed_by"]
       }
     }
   }
