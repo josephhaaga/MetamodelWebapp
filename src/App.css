@@ -67,3 +67,61 @@
 .static .accordion-content{
   display: block;
 }
+
+
+/*  ONE HOP  */
+.one-hop{
+  position: relative;
+}
+
+.one-hop .inputs form{
+  display: inline;
+  position: absolute;
+}
+
+.one-hop .inputs form .node select{
+  background: #732c98;
+  color: white;
+}
+
+.one-hop .inputs form .edge select{
+  background: #219d8f;
+  color: white;
+}
+
+.one-hop .inputs form.nodeA{
+  top: 26%;
+  left: 12%;
+}
+
+.one-hop .inputs form.nodeB{
+  bottom: 8%;
+  left: 42%;
+}
+
+.one-hop .inputs form.nodeC{
+  top: 26%;
+  right: 12%;
+}
+
+.one-hop .inputs form.edgeR1{
+  top: 51%;
+  left: 17%;
+}
+
+.one-hop .inputs form.edgeR2{
+  top: 51%;
+  right: 17%;
+}
+
+.one-hop .inputs form.edgeR3{
+  top: 26%;
+  left: 40%;
+}
+
+.one-hop .inputs form.edgeR3 input{
+  width: 120px;
+  border: 3px solid dodgerblue;
+  background: #219d8f;
+  color: white;
+}
