@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Gist from 'react-gist';
 import { NewStepDialogue } from './NewStepDialogue.js';
+import { VersionHistory } from './VersionHistory';
 
 class ModelPage extends Component {
   constructor(props){
@@ -44,12 +45,17 @@ class ModelPage extends Component {
   }
 
   render(){
+    // const numSteps = this.
     const thisStep = this.data[this.state.step];
-    // const gistUrl = thisStep['gist'];
     const graphUrl = thisStep['graph'];
     const leftHandSide = (('gist' in thisStep)
       ? <Gist id={thisStep['gist']} />
       : <NewStepDialogue />
+    )
+    const versionGraph = (
+      <VersionHistory
+       numSteps={this.data.length}
+       activeStep={this.state.step} />
     )
     return (
       <div className="cell medium-12">
@@ -62,7 +68,7 @@ class ModelPage extends Component {
           </div>
           <div className="cell medium-12">
             <div className="grid-x">
-              <div className="cell medium-8">
+              <div className="cell medium-3">
                 <div className="button-group">
                   <a className="button left"
                     onClick={this.decrement}>&larr;</a>
@@ -70,7 +76,10 @@ class ModelPage extends Component {
                     onClick={this.increment}>&rarr;</a>
                 </div>
               </div>
-              <div className="cell medium-4">
+              <div className="cell medium-6">
+                {versionGraph}
+              </div>
+              <div className="cell medium-3">
                 <button className="button fork"
                   onClick={this.forkModel}>Fork this model</button>
               </div>
