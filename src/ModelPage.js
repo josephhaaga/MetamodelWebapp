@@ -59,7 +59,7 @@ class ModelPage extends Component {
       : <NewStepDialogue />
     )
     const versionGraph = (
-      <img src={branchUrl} />
+      <img src={branchUrl} style={{height: "75px"}} />
     )
     return (
       <div className="cell medium-12">

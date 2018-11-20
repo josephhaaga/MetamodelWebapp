@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 class OneHop extends Component {
   constructor(props){
     super(props)
+    this.enableButton = this.enableButton.bind(this)
     this.data = {
       motif: "(a)-[r1]->(b); (c)-[r2]->(b); (a) != (c)",
       transform: "(a)-[r3]->(c)",
@@ -11,6 +12,12 @@ class OneHop extends Component {
         edge: ["Edge", "claims_dependent", "owned_by", "employed_by"]
       }
     }
+    this.state = {
+      buttonEnabled: false
+    }
+  }
+  enableButton(){
+    this.setState({buttonEnabled: true})
   }
   render(){
     const vertexOptions = this.data.parameterTypes.vertex.map(x =>
@@ -56,9 +63,10 @@ class OneHop extends Component {
     )
     const edgeR3 = (
       <div>
-        <input type="text" />
+        <input type="text" onChange={this.enableButton}/>
       </div>
     )
+    const buttonStatus = ((this.state.buttonEnabled) ? '' : 'disabled')
     return (
       <div className="one-hop">
         <li className="accordion-item static" style={{listStyleType: "none"}}>
@@ -85,6 +93,9 @@ class OneHop extends Component {
                 {edgeR3}
               </form>
             </div>
+            <button
+             className={"button "+buttonStatus}
+             >Generate Code</button>
           </div>
         </li>
       </div>

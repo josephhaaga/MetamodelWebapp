@@ -90,32 +90,32 @@
 }
 
 .one-hop .inputs form.nodeA{
-  top: 26%;
+  top: 23%;
   left: 12%;
 }
 
 .one-hop .inputs form.nodeB{
-  bottom: 8%;
+  bottom: 18%;
   left: 42%;
 }
 
 .one-hop .inputs form.nodeC{
-  top: 26%;
+  top: 23%;
   right: 12%;
 }
 
 .one-hop .inputs form.edgeR1{
-  top: 51%;
+  top: 46%;
   left: 17%;
 }
 
 .one-hop .inputs form.edgeR2{
-  top: 51%;
+  top: 46%;
   right: 17%;
 }
 
 .one-hop .inputs form.edgeR3{
-  top: 25.7%;
+  top: 23%;
   left: 40%;
 }
 
