@@ -90,32 +90,32 @@
 }
 
 .one-hop .inputs form.nodeA{
-  top: 23%;
+  top: 22%;
   left: 12%;
 }
 
 .one-hop .inputs form.nodeB{
-  bottom: 18%;
-  left: 42%;
+  bottom: 21%;
+  left: 41%;
 }
 
 .one-hop .inputs form.nodeC{
-  top: 23%;
+  top: 22%;
   right: 12%;
 }
 
 .one-hop .inputs form.edgeR1{
-  top: 46%;
+  top: 44%;
   left: 17%;
 }
 
 .one-hop .inputs form.edgeR2{
-  top: 46%;
+  top: 44%;
   right: 17%;
 }
 
 .one-hop .inputs form.edgeR3{
-  top: 23%;
+  top: 22%;
   left: 40%;
 }
 
@@ -124,4 +124,22 @@
   border: 3px solid dodgerblue;
   background: #219d8f;
   color: white;
+}
+
+.result-code {
+  position: fixed;
+  width: 100%;
+  top: 50%;
+  transform: translate(0%, -50%);
+}
+
+.result-code::before {
+  content: '';
+  background: #000000c9;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  z-index: -1;
+  top: -50%;
+  left: -2%;
 }

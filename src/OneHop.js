@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
+import Gist from 'react-gist';
 
 class OneHop extends Component {
   constructor(props){
     super(props)
     this.enableButton = this.enableButton.bind(this)
+    this.showModal = this.showModal.bind(this)
     this.data = {
       motif: "(a)-[r1]->(b); (c)-[r2]->(b); (a) != (c)",
       transform: "(a)-[r3]->(c)",
@@ -13,11 +15,15 @@ class OneHop extends Component {
       }
     }
     this.state = {
-      buttonEnabled: false
+      buttonEnabled: false,
+      modalEnabled: false
     }
   }
   enableButton(){
     this.setState({buttonEnabled: true})
+  }
+  showModal(){
+    this.setState({modalEnabled: true})
   }
   render(){
     const vertexOptions = this.data.parameterTypes.vertex.map(x =>
@@ -67,6 +73,10 @@ class OneHop extends Component {
       </div>
     )
     const buttonStatus = ((this.state.buttonEnabled) ? '' : 'disabled')
+    const modal = ((this.state.modalEnabled)
+      ? <div className="result-code"><Gist id={'9965f3190b83fa10ae1a3ca5af654cdc'} /></div>
+      : null
+    )
     return (
       <div className="one-hop">
         <li className="accordion-item static" style={{listStyleType: "none"}}>
@@ -95,9 +105,12 @@ class OneHop extends Component {
             </div>
             <button
              className={"button "+buttonStatus}
+             style={{marginTop: "1rem"}}
+             onClick={this.showModal}
              >Generate Code</button>
           </div>
         </li>
+        {modal}
       </div>
     )
   }
