@@ -1,14 +1,20 @@
 import React, { Component } from 'react'
 
 class VersionHistory extends Component {
+  componentDidMount(){
+    this.update();
+  }
   componentDidUpdate() {
+    this.update();
+  }
+  update(){
     // https://blog.cloudboost.io/using-html5-canvas-with-react-ff7d93f5dc76
     const canvas = this.refs.canvas
     const ctx = canvas.getContext("2d")
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     const centerX = canvas.width / 2;
-    const centerY = canvas.height / 2;
-    const radius = 20;
+    const centerY = canvas.height / 3;
+    const radius = 10;
 
     for(var i=0; i < this.props.numSteps; i++){
       ctx.beginPath();
