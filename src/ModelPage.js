@@ -51,8 +51,10 @@ class ModelPage extends Component {
 
   render(){
     // const numSteps = this.
+    const lastStep = (this.state.step > 0) ? this.data[this.state.step - 1] : null;
     const thisStep = this.data[this.state.step];
-    const graphUrl = thisStep['graph'];
+    const oldGraphUrl = (lastStep) ? lastStep['graph'] : null;
+    const newGraphUrl = thisStep['graph'];
     const branchUrl = thisStep['branch'];
     const leftHandSide = (('gist' in thisStep)
       ? <Gist id={thisStep['gist']} />
@@ -90,14 +92,19 @@ class ModelPage extends Component {
             </div>
             <h2>Step {this.state.step + 1}</h2>
           </div>
-          <div className="cell medium-6">
+          <div className="cell medium-4">
+            <img
+             src={oldGraphUrl}
+             style={{width: "100%"}} />
+          </div>
+          <div className="cell medium-4">
             <div className="the-code">
               {leftHandSide}
             </div>
           </div>
-          <div className="cell medium-6">
+          <div className="cell medium-4">
             <img
-             src={graphUrl}
+             src={newGraphUrl}
              style={{width: "100%"}} />
           </div>
         </div>
