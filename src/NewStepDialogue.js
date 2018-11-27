@@ -76,7 +76,7 @@ class NewStepDialogue extends Component {
       )
     })
     const newStep = ((this.state.newOperationSelected)
-      ? <div>
+      ? <div className="the-operation">
           <OneHop name="One-Hop"/>
         </div>
       : <ul className="accordion" data-accordion>

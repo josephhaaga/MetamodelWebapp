@@ -19,6 +19,20 @@ class OneHop extends Component {
       modalEnabled: false
     }
   }
+
+  componentDidMount() {
+    const canvas = this.refs.canvas
+    const ctx = canvas.getContext("2d")
+    ctx.beginPath();
+    ctx.strokeStyle = "#2bc259";
+    ctx.moveTo(10,25);
+    ctx.lineTo(150,175);
+    ctx.lineTo(290,25);
+    ctx.lineTo(10,25);
+    ctx.stroke();
+    ctx.globalCompositeOperation='destination-over';
+  }
+
   enableButton(){
     this.setState({buttonEnabled: true})
   }
@@ -82,26 +96,47 @@ class OneHop extends Component {
         <li className="accordion-item static" style={{listStyleType: "none"}}>
           <h4 className="accordion-title">One Hop</h4>
           <div className="accordion-content">
-            <img src="assets/OneHop.jpg" />
             <div className="inputs">
-              <form className="nodeA">
-                {nodeA}
-              </form>
-              <form className="nodeB">
-                {nodeB}
-              </form>
-              <form className="nodeC">
-                {nodeC}
-              </form>
-              <form className="edgeR1">
-                {edgeR1}
-              </form>
-              <form className="edgeR2">
-                {edgeR2}
-              </form>
-              <form className="edgeR3">
-                {edgeR3}
-              </form>
+              <canvas ref="canvas" width={300} height={200}/>
+              <div className="grid-x" style={{position: "absolute", top: "0px"}}>
+                <div className="cell medium-3">
+                  <form className="nodeA">
+                    {nodeA}
+                  </form>
+                </div>
+                <div className="cell medium-3 medium-offset-1">
+                  <form className="edgeR3">
+                    {edgeR3}
+                  </form>
+                </div>
+                <div className="cell medium-3 medium-offset-1">
+                  <form className="nodeC">
+                    {nodeC}
+                  </form>
+                </div>
+
+                <br/><br/>
+
+                <div className="cell medium-3 medium-offset-1">
+                  <form className="edgeR1">
+                    {edgeR1}
+                  </form>
+                </div>
+                <div className="cell medium-3 medium-offset-3">
+                  <form className="edgeR2">
+                    {edgeR2}
+                  </form>
+                </div>
+
+                <br/><br/>
+
+                <div className="cell medium-3 medium-offset-4">
+                  <form className="nodeB">
+                    {nodeB}
+                  </form>
+                </div>
+
+              </div>
             </div>
             <button
              className={"button "+buttonStatus}
