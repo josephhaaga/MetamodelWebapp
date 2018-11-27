@@ -84,7 +84,7 @@ class OneHop extends Component {
     )
     const edgeR3 = (
       <div>
-        <input type="text" onChange={this.enableButton}/>
+        <input type="text" onBlur={this.enableButton}/>
       </div>
     )
     const buttonStatus = ((this.state.buttonEnabled) ? '' : 'disabled')

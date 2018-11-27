@@ -11,7 +11,8 @@ class ModelPage extends Component {
     this.decrement = this.decrement.bind(this)
     this.forkModel = this.forkModel.bind(this)
     this.generateResult = this.generateResult.bind(this)
-    this.data = [
+    this.state = {
+      data: [
       {
         gist: '4ca633e244d5eb5e10246db6b9879e62',
         oldGraph: blank,
@@ -27,26 +28,28 @@ class ModelPage extends Component {
         oldGraph: 'assets/createEdges.jpg',
         newGraph: 'assets/createHyperedges.jpg',
         branch: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAhgAAABqCAYAAAD+8SjzAAAEzUlEQVR42u3dvW8bZRgA8IzpeWBhRLRCzLQTElMY2RBjp0SsDB2YUSfUTHVEEkdVBBagIhTxVVQVuyhqFyQGpAS5yYac/8D9D8w9oQWnuHf+uDs7zu8nPVKUxu8lj+w+z929975LSwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAUIy/fl16pdO6dKPTSppPWrVHw+Kondx80q6tyhYAkOmolbx/2kC0a/1xotNOfozXyiAA8K/j/eXLkzQW/4t0jE6rdlVGAebY5ubmu1tbW/Xt7e1HaXR3dnb6EenXB/G9+LfUNZmSv2nErZCpG4sXr2ikY3oHAsyZtPitDRbEvIifTYule+HyN0FzkTSLbi7+azKSpncjwByIs+k4ux61MA4plAfpGFfkT/5GERM0y2ouBkLjCzBLcTk/LXC9SYvjQJHsxVjyJ39z0FxoMgBmXRynLYwvxkVqMuRvPDEJM41eXmNw+Mur/f3vVvp7X37U/6b58Zm4d/d6//EPb494q6TWM/EToGLPLuv3ii6QMeZFuNwvfxNcvRjhaZFoHnbv3M7N0xe7n47WaKTH9GkHqFBayA6LLo6DcwrkT/7ONBcj3Br5/usPx85VvMatEoD5KY5rZRXHgSK5Jn/y91ynlXSzmoC4JTJpruK1OU+VdH3qAaopkCcVFMiu/MlfOF2lM6MB+O2nt6bOV4yRdQyrfQKUrIyJiS+LRqPRr+pYixiLkr/23nuZEzpjPsW0x4gxYqyXHSd+h/OWN/9bAeft7HtD8RZVxu8/v1lJ4c9qZOJ30GAAlNtgPHYGfj7+pkXJX9ati3j0tKjjxFhZx9JgAJTbYJwokBqMeWkwzvOxNBgAA1yyFxoMDQaABkNoMDQYAG6ReLJDjFP0v/r8k8KOE2NpMABm12CY5GkORqWRtUbFJKt3TrKqZxFrbWgwALIbDI+pikoja6XNaVbwnNVxNBgAQ1hoy9WSqiNvv5CiFtoqep8TDQbA+Fcxqljq+kT+FJdwvL98OW8H1WnzlbezavwOPvkA5RdIm3XNef7e+WxvZZFylrdV+7271yfOVbzWlu0A81Mky9xu/FD+psrfn0u37r+xSPnK2/As4sG3H4ydq3hN3rg2OgOoUL1ev9ZoNJ6WMG/gaTr2FfmbPH/r6+uvL2LO8q5iPJ+MuXvn9khzLvK2aXf1AmBGypjwGYVX/uRvmE6rdjW3IUjjj/uvnd72GNZoRGMRm5pl7Zw6GHFMn3SAGRXJIs7EY4wYS/7kL7vJuHRjlMagiIhj+YQDzFCcNU8zpyBeexFui8hfUU1G0iy/uUiaPtkAcyKejhjnEcz42UV+WkT+ynPUTm6W1VzE2N6NAPN7Rr4Ry4oPnpnH18++t3GR5lrIXznSZmC106r1Cm4wVr0DAeCC+2cRruRg+sYiOTChEwA4IyZkdlpJd4K5Fl1XLQCATLEoVkzQzG42Tq941I8fLq/IGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwE38DqHUf6UJJIn8AAAAASUVORK5CYII="
-      }]
-    this.state = {
+      }],
       step: 0,
       forked: false
     }
   }
   forkModel(){
-    this.data = this.data.splice(0, this.state.step + 1)
-    this.data.push({
+
+    let newData = this.state.data.splice(0, this.state.step + 1)
+    newData.push({
       oldGraph: 'assets/createHyperedges.jpg',
       branch: "data:image/png;base64,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"
     })
+
     this.setState({
       forked: true,
-      step: this.state.step + 1
+      step: this.state.step + 1,
+      data: newData
     })
   }
   increment(){
     this.setState({
-      step: Math.min(this.data.length - 1, this.state.step + 1)
+      step: Math.min(this.state.data.length - 1, this.state.step + 1)
     })
   }
   decrement(){
@@ -56,17 +59,17 @@ class ModelPage extends Component {
   }
 
   generateResult(){
-    const a = this.data
+    const a = this.state.data
     let z = a[a.length - 1]
     z['newGraph'] = createOneHop;
     a.splice(a.length-1,1,z)
-    this.data = a
+    this.setState({data: a})
   }
 
   render(){
     // const numSteps = this.
-    // const lastStep = (this.state.step > 0) ? this.data[this.state.step - 1] : null;
-    const thisStep = this.data[this.state.step];
+    // const lastStep = (this.state.step > 0) ? this.state.data[this.state.step - 1] : null;
+    const thisStep = this.state.data[this.state.step];
     // const oldGraphUrl = (lastStep) ? lastStep['graph'] : null;
     // const newGraphUrl = thisStep['graph'];
     const oldGraphUrl = thisStep['oldGraph'];
