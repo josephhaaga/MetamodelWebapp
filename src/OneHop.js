@@ -34,6 +34,7 @@ class OneHop extends Component {
   }
 
   enableButton(){
+    this.props.completed();
     this.setState({buttonEnabled: true})
   }
   showModal(){
@@ -97,7 +98,7 @@ class OneHop extends Component {
           <h4 className="accordion-title">One Hop</h4>
           <div className="accordion-content">
             <div className="inputs">
-              <canvas ref="canvas" width={300} height={200}/>
+              <canvas ref="canvas" width={300} height={200} style={{maxWidth: "100%"}}/>
               <div className="grid-x" style={{position: "absolute", top: "0px"}}>
                 <div className="cell medium-3">
                   <form className="nodeA">
