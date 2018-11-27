@@ -3,6 +3,7 @@ import Gist from 'react-gist';
 import { NewStepDialogue } from './NewStepDialogue.js';
 import blank from './assets/blankSlate.jpg';
 import createOneHop from './assets/createOneHop.jpg';
+import subGraph from './assets/subGraph.jpg';
 
 class ModelPage extends Component {
   constructor(props){
@@ -10,7 +11,8 @@ class ModelPage extends Component {
     this.increment = this.increment.bind(this)
     this.decrement = this.decrement.bind(this)
     this.forkModel = this.forkModel.bind(this)
-    this.generateResult = this.generateResult.bind(this)
+    this.generateSubgraphResult = this.generateSubgraphResult.bind(this)
+    this.generateOneHopResult = this.generateOneHopResult.bind(this)
     this.state = {
       data: [
       {
@@ -58,10 +60,17 @@ class ModelPage extends Component {
     })
   }
 
-  generateResult(){
-    const a = this.state.data
+  generateOneHopResult(q){
+    const a = JSON.parse(JSON.stringify(this.state.data))
     let z = a[a.length - 1]
     z['newGraph'] = createOneHop;
+    a.splice(a.length-1,1,z)
+    this.setState({data: a})
+  }
+  generateSubgraphResult(q){
+    const a = JSON.parse(JSON.stringify(this.state.data))
+    let z = a[a.length - 1]
+    z['newGraph'] = subGraph;
     a.splice(a.length-1,1,z)
     this.setState({data: a})
   }
@@ -77,7 +86,10 @@ class ModelPage extends Component {
     const branchUrl = thisStep['branch'];
     const leftHandSide = (('gist' in thisStep)
       ? <Gist id={thisStep['gist']} />
-      : <NewStepDialogue completed={this.generateResult} />
+      : <NewStepDialogue
+          completedOnehop={this.generateOneHopResult}
+          completedSubgraph={this.generateSubgraphResult}
+          />
     )
     const versionGraph = (
       <img src={branchUrl} style={{height: "75px"}} />

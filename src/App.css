@@ -38,10 +38,10 @@
   background: #271c2e;
 }
 
-.the-code .the-operation .accordion-content .inputs{
+.the-code .the-operation .one-hop .accordion-content .inputs{
   position: relative;
 }
-.the-code .the-operation .accordion-content .inputs select{
+.the-code .the-operation .one-hop .accordion-content .inputs select{
   width: 100px;
   max-width: 100%;
   padding-right: 4px;
@@ -82,7 +82,7 @@
   position: relative;
 }
 
-.one-hop .inputs form .node select{
+.inputs form select{
   background: #732c98;
   color: white;
 }
@@ -117,4 +117,9 @@
   z-index: -1;
   top: 0;
   transform: translateY(-22%);
+}
+
+/* Subgraph */
+.subgraph span {
+  color: white;
 }

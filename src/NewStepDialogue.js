@@ -81,8 +81,8 @@ class NewStepDialogue extends Component {
     })
 
     const operation = ((this.state.newOperationSelected === 'Subgraph')
-      ? <Subgraph name="Subgraph" completed={this.props.completed} />
-      : <OneHop name="One-Hop" completed={this.props.completed}/>
+      ? <Subgraph name="Subgraph" completed={this.props.completedSubgraph} />
+      : <OneHop name="One-Hop" completed={this.props.completedOnehop}/>
     )
 
     const newStep = ((this.state.newOperationSelected)

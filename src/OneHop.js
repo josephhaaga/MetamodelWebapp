@@ -34,7 +34,7 @@ class OneHop extends Component {
   }
 
   enableButton(){
-    this.props.completed();
+    this.props.completed("OneHop");
     this.setState({buttonEnabled: true})
   }
   showModal(){
