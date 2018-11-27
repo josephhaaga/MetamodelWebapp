@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { OneHop } from './OneHop';
+import { Subgraph } from './Subgraph';
 
 class NewStepDialogue extends Component {
   constructor(props){
@@ -10,9 +11,7 @@ class NewStepDialogue extends Component {
       {
         src: "DF",
         dst: "GF",
-        operations: [
-          ""
-        ],
+        operations: [],
         disabled: true
       },
       {
@@ -21,7 +20,8 @@ class NewStepDialogue extends Component {
         operations: [
           "One-hop",
           "Map",
-          "Filter"
+          "Filter",
+          "Subgraph"
         ],
         disabled: false
       },
@@ -40,13 +40,17 @@ class NewStepDialogue extends Component {
       newOperationSelected: false
     }
   }
-  doOperation(){
+  doOperation(a){
+    let newOp = "OneHop"
+    if(a.target.innerText === "Subgraph"){
+      newOp = "Subgraph"
+    }
+    console.log(newOp);
     this.setState({
-      newOperationSelected: true
+      newOperationSelected: newOp
     })
   }
   setActive(idx){
-    console.log(idx);
     this.setState({
       active: idx
     })
@@ -59,7 +63,7 @@ class NewStepDialogue extends Component {
       const disabled = ((x.disabled) ? 'disabled' : '');
       const panelContent = x.operations.map((y, idx2) => {
         return (
-          <li key={idx2}><a href="#" onClick={y => doOperation(y)}>{y}</a></li>
+          <li key={idx2}><a href="#" key={idx2} onClick={idx2 => doOperation(idx2)}>{y}</a></li>
         )
       })
       const theIndex = idx;
@@ -75,9 +79,15 @@ class NewStepDialogue extends Component {
         </li>
       )
     })
+
+    const operation = ((this.state.newOperationSelected === 'Subgraph')
+      ? <Subgraph name="Subgraph" completed={this.props.completed} />
+      : <OneHop name="One-Hop" completed={this.props.completed}/>
+    )
+
     const newStep = ((this.state.newOperationSelected)
       ? <div className="the-operation">
-          <OneHop name="One-Hop" completed={this.props.completed}/>
+          {operation}
         </div>
       : <ul className="accordion" data-accordion>
           {opsPanels}
