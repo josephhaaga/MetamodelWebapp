@@ -4,6 +4,8 @@ import { NewStepDialogue } from './NewStepDialogue.js';
 import blank from './assets/blankSlate.jpg';
 import createOneHop from './assets/createOneHop.jpg';
 import subGraph from './assets/subGraph.jpg';
+import { RIEInput } from 'riek';
+import _ from 'lodash';
 
 class ModelPage extends Component {
   constructor(props){
@@ -11,21 +13,26 @@ class ModelPage extends Component {
     this.increment = this.increment.bind(this)
     this.decrement = this.decrement.bind(this)
     this.forkModel = this.forkModel.bind(this)
+    this.updateTitle = this.updateTitle.bind(this)
     this.generateSubgraphResult = this.generateSubgraphResult.bind(this)
     this.generateOneHopResult = this.generateOneHopResult.bind(this)
     this.state = {
+      comments: [],
       data: [
       {
+        title: "Create Nodes",
         gist: '4ca633e244d5eb5e10246db6b9879e62',
         oldGraph: blank,
         newGraph: 'assets/createNodes.jpg',
         branch: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAhgAAABqCAYAAAD+8SjzAAAE00lEQVR42u3dv28bVRwA8IzpeWBhRLRCzLQTElM6siHGTo1YGTowo06omeoKJ46qCCxARSjiV1FV7KKoXZAYkBLkJhty/wP3PzD3DSmYkNw59tlK330+0pOiNH5XfXW+7/fevXtvaQkAAAAAAAAAAAAAAAAAAAAAAAAAAAAASMmfvyy90u9euNHvZp2n3cbjk9p+L7v5tNe4LloAQKH9bvbeYQHRa4zO0vq97If4rAgCAP842Fm+OE1h8b+W99HvNi6LKADUXDwKmbmwOD6ikfdZ97i2Wq2r6+vrzY2Njcd5G2xubo6i5T/vxu/i33JXnIHiB5BgcZF1qi4u/i0ysk4dY5onv9XxhFjW4m/zZGkui/gBpCEmaM6ruBhrtbnwx9103F1PmhhPSJS7eR+X6no+ih+A4kKRcUwM5+cJbjhtchxLksPoq27no/gBJCAmYeZtWFYY7P386mjn25XR9hcfjr7ufPSfdv/etdGT79+e8FFJY5jyxM9IaLMmxuOtTklS/ABSGb2Y4G2RKB627t4uvZB/vvXJZIVGfswUY3k0rD+sOkFGn3UY7hc/gFSKiwkejXz31QdnvqDHZ+r4qCRPZHtVJ8fxOQWpn4/iB5CIfjcbFBUB8Uhk2gt6fLbkrZJBYslxdV7JcSxJriZcXIgfQAoOV+ksKAB+/fGtmS/o0UfRMVJa7TNPXs8WkCAHqZ6P4geQiDzBN4smdMZ8ilkv6NFH9HXacXrb747mnVRSa+12WxxqHD9XLuAlKDCy3UUk/ujrtOP89tObkp6mKTCAxEYwTk388eppVRfE6KvoWO6KjWCInwIDqEmBUfVFUYEhQYqfAgNQYCgwNE2BAaDA0DQFBsBLUGB8+dnHlV0Qoy+PSDTxU2AAdSkwCpYIn2b1zmlW9axirQ1zCMTPHAyAc6TfzTrzWMHzLCt6VnkcTTOCAXA+HpEU7kNS1UJbVe9z4nGCxwlGMADOsYOd5YtlO6jOejEs21k1/g+pxHMRS12nfD4uaKnwZ775AIsYxSjZqv3+vWtTX8zjs3Xasn0Rm3W98+n2SsIFhs3OAFJRtuFZtIffvH/mC3l8pqzflDY6G0uS89xu/I+lWw/eSHwUY57x2/ONBzhHoxgvJmNu3b090ZyLsm3aUxy9eKHZbF5pt9vP5zBv4Pna2trrqZ+L84xf3vcl33aABep3G5dLC4K8/f7gtcPHHicVGlFYxKZmRTunjrc4ZqrxbLVaV6tOkJF463I+ih9AUkXGhRuTFAZVtDhWHZJkFXfi0Uf0VbfzUfwAkioyTl8Xo7riIuvUJZ5x1zzLnIL4bJ2H9cUPICH7vezmvIqL6LuOMY03F87yCmb8rbcdxA8gObEAV7/bGFZcYFyve1yP7sjv5O3J+J15/Hz0uzvmCogfQNL+XoQr2529sMh2U57QCQBMISZk9rvZYIq5FgOjFgBAoVgUKyZoFhcbhyMezYNHyysiBgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABA7fwFhmVz9j755m4AAAAASUVORK5CYII="
       }, {
+        title: "Create Edges",
         gist: '40627a247ac785b610f12caa25dabe00',
         oldGraph: 'assets/createNodes.jpg',
         newGraph: 'assets/createEdges.jpg',
         branch: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAhgAAABqCAYAAAD+8SjzAAAEtklEQVR42u3dPW8cRRgAYJfOXkFDGSkpqEkq2qRMhyhT2aKlSEGNUtHGlmyfFVlwAhSEIr6CEOyBrKRBokCypYvdIfsfXP7Bse+RwBGc3fvYO9jZ55FGshzfzGnyau7dmbmZtTUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAF74/ee11wb5pTuDPOs9zTuPLyon/ezu035nQ28BAKVO8uztcQLR74xmKYN+9k28Vg8CAH85PVy/Mk9i8a9S1DHIO9f0KADJ2tnZubm7u7u1t7f3uChn+/v7oyjFz0fxu/i3wvW291MshSycWLw8o1HUKf7EH0BSisF7c3JAryrxt8Vg38q9BOM9FjUnF38nGVlP/Ik/gMaLp8F4Opx2YL9goD8q6rjalv6KDZrLSi4myob4E38AjRXT0cUAPZx3cJ8Y5IdRl+RCkiH+ACQXNxcd2F8uKQ/ysQmzKMOqxOD4x9dHh1/eGD385L3R5733/1EePbg9evL1W1MulXSGKW/8FH8ACXo+LT2se4CPOlOdrp7m2yKRPBzcv1fZTx8ffDhdolG0Kf7EH0BjFAPxcd2D++SaeHLJxRRLI1999u7MfRWvaeNSifgDSDO52FzW4D4xyG+m1GeDPDsrSwJiSWTevorXVnyr5Ez8tTv+AJoywJ+vYIBP5kNxfEpnSQLwy7dvLtxfUUdZGymd9in+ABK0jI11ryrdbne0qraWWfoPb5Vu6Iz9FIu2EXVEXa9qJ95DCn25ytL0+DNaAU17etz24TNb+fW7N1bywV+WyMR78H/RrmK0ApqWYDzxBDlbKVu6iK+e1tVO1FXWllkFMxgA/+cE49wAX1+C0eS2JBgSDIDamHqWYCgSDAAJhgRDgiHBALBE0rYE49OPPqitnajLEokiwQCammDY5FnjGRXznN45z6medZy1YQ+GBANgmQmGr6nWeNLmIid4/lftKBIMgNo5aKvemYUodR20Vfc9Jw7aMoMBsOpZjFUc1XyeSn+dHq5fqbpBddH+qrpZNd6D+Gtn/AE0aYB32dSMqq5qf/Tg9tx9Fa9t05Xt4g8g7SRjmddlH6fWX1UXnkX54Yt3Zu6reE1VvSlddCb+ABK3tbV1vdvtPlvCuvezou6rKfZZ1SzGi82YB/fvTbXnouqa9hRnL8QfQAssY8NnfHCk2l+DvHOtMiEoym/fXx4ve1yUaERiEZeald2cOlmiTfEn/gAaOcjX8SQZdURdqffXIL90Z5rEoI4SbYk/8QfQWPHUt8iaeLy2TdPSgzzrLT+5yHriT/wBJCF23s/yFcL427bu1j/pZ3eXlVxE3eJP/AGk+kS5HceKTz5Zxs/Pf7dtrXttrUgGNgZ5Z1hzgrEh/sQfAC335yFc2dHiiUV2lPKGTgBgDrEhc5BnZ3PstTgzawEAlIpDsWKDZnmyMZ7x2Dr9af2GHgMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaKA/AENIIawr6Ae1AAAAAElFTkSuQmCC"
       }, {
+        title: "Create Hyperedges",
         gist: '4789af32d8a408524a68473a7997f3fb',
         oldGraph: 'assets/createEdges.jpg',
         newGraph: 'assets/createHyperedges.jpg',
@@ -75,15 +82,28 @@ class ModelPage extends Component {
     this.setState({data: a})
   }
 
+  updateTitle(newTitle){
+    let newData = this.state.data
+    console.log(newData);
+    newData[this.state.step]['title'] = newTitle.title
+    console.log(newData);
+    this.setState({
+      data: newData
+    })
+  }
+
   render(){
-    // const numSteps = this.
-    // const lastStep = (this.state.step > 0) ? this.state.data[this.state.step - 1] : null;
     const thisStep = this.state.data[this.state.step];
-    // const oldGraphUrl = (lastStep) ? lastStep['graph'] : null;
-    // const newGraphUrl = thisStep['graph'];
     const oldGraphUrl = thisStep['oldGraph'];
     const newGraphUrl = ('newGraph' in thisStep) ? thisStep['newGraph'] : null;
     const branchUrl = thisStep['branch'];
+    const theTitle = (
+      <RIEInput
+        value={thisStep.title}
+        change={this.updateTitle}
+        propName='title'
+        validate={_.isString} />
+    )
     const leftHandSide = (('gist' in thisStep)
       ? <Gist id={thisStep['gist']} />
       : <NewStepDialogue
@@ -121,7 +141,7 @@ class ModelPage extends Component {
                   onClick={this.forkModel}>Fork this model</button>
               </div>
             </div>
-            <h2>Step {this.state.step + 1}</h2>
+            <h2>Step {this.state.step + 1} {theTitle}</h2>
           </div>
           <div className="cell medium-4">
             <img

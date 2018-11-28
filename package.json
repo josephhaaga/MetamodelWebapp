@@ -23,5 +23,9 @@
     "not ie <= 11",
     "not op_mini all"
   ],
-  "homepage": "https://joehaaga.xyz/MetamodelWebapp/"
+  "homepage": "https://joehaaga.xyz/MetamodelWebapp/",
+  "devDependencies": {
+    "lodash": "^4.17.11",
+    "riek": "^1.1.0"
+  }
 }
