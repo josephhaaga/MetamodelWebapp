@@ -146,7 +146,11 @@
 }
 
 
-.attribute, .inputs form select.attribute {
-  background: #bb7149;
-  color: white;
+.inputs form select.attribute {
+  background: white;
+  color: black;
+}
+
+.logic, .inputs form select.logic {
+  background: #8c8c8c;
 }
