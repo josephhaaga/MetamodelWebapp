@@ -48,7 +48,7 @@ class Subgraph extends Component {
                   <option>equals</option>
                   <option>less than</option>
                   <option selected>greater than</option>
-                  <option>within</option>
+                  <option disabled>within</option>
                 </select>
               </div>
               <div className="cell small-4">
