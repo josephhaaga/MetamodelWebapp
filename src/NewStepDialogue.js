@@ -37,6 +37,7 @@ class NewStepDialogue extends Component {
     ]
     this.state = {
       active: 0,
+      step: this.props.step,
       newOperationSelected: false
     }
   }
@@ -54,6 +55,12 @@ class NewStepDialogue extends Component {
     this.setState({
       active: idx
     })
+  }
+  componentWillReceiveProps(props) {
+    const { step, fn1, fn2 } = this.props;
+    if (props.step !== step) {
+      this.setState({newOperationSelected: false})
+    }
   }
   render(){
     const doOperation = this.doOperation;

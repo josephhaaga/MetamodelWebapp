@@ -120,6 +120,7 @@ class ModelPage extends Component {
     const leftHandSide = (('gist' in thisStep)
       ? <Gist id={thisStep['gist']} />
       : <NewStepDialogue
+          step={this.state.step}
           completedOnehop={this.generateOneHopResult}
           completedSubgraph={this.generateSubgraphResult}
           />
