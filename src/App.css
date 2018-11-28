@@ -144,3 +144,9 @@
 .subgraph span {
   color: white;
 }
+
+
+.attribute, .inputs form select.attribute {
+  background: #bb7149;
+  color: white;
+}

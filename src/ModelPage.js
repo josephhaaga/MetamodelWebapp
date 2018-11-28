@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Gist from 'react-gist';
 import { NewStepDialogue } from './NewStepDialogue.js';
 import blank from './assets/blankSlate.jpg';
-import createOneHop from './assets/createOneHop.jpg';
+import createOneHop from './assets/subGraphOneHop.jpg';
 import subGraph from './assets/subGraph.jpg';
 import { RIEInput } from 'riek';
 import _ from 'lodash';
@@ -47,7 +47,7 @@ class ModelPage extends Component {
     let newData = this.state.data.splice(0, this.state.step + 1)
     newData.push({
       title: "Another New Step",
-      oldGraph: createOneHop,
+      oldGraph: subGraph,
       branch: "data:image/png;base64,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"
     })
     this.setState({
@@ -157,7 +157,7 @@ class ModelPage extends Component {
                   onClick={this.forkModel}>Fork this model</button>
               </div>
             </div>
-            <h2>Step {this.state.step + 1} {theTitle}</h2>
+            <h2>Step {this.state.step + 1}: {theTitle}</h2>
           </div>
           <div className="cell medium-4">
             <img

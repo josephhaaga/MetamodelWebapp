@@ -4,10 +4,19 @@ class Subgraph extends Component {
   constructor(props){
     super(props)
     this.addFilter = this.addFilter.bind(this)
+    this.changedVal = this.changedVal.bind(this)
     this.state = {
       buttonEnabled: false,
-      modalEnabled: false
+      modalEnabled: false,
+      filtersApplied: false
     }
+  }
+
+  changedVal(){
+    this.props.completed()
+    this.setState({
+      filtersApplied: true
+    })
   }
 
   addFilter(){
@@ -16,11 +25,44 @@ class Subgraph extends Component {
   render(){
     const buttonStatus = this.state.buttonEnabled
     const modal = this.state.modalEnabled
-
+    const filters = ((this.state.filtersApplied)
+      ?
+        <div className="grid-x">
+          <div className="cell small-12">
+            <p style={{color: "white"}}>where</p>
+          </div>
+          <div className="cell small-11 small-offset-1">
+            <div className="grid-x">
+              <div className="cell small-4">
+                <select className="attribute">
+                  <option value="" disabled>Attr</option>
+                  <option>Name</option>
+                  <option selected>Age</option>
+                  <option>Status</option>
+                  <option>Address</option>
+                </select>
+              </div>
+              <div style={{textAlign: "center"}} className="cell small-4">
+                <select className="logic" style={{paddingRight: "0"}}>
+                  <option value="" disabled>comparison</option>
+                  <option>equals</option>
+                  <option>less than</option>
+                  <option selected>greater than</option>
+                  <option>within</option>
+                </select>
+              </div>
+              <div className="cell small-4">
+                <input className="attribute" type="text" value="30"/>
+              </div>
+            </div>
+          </div>
+        </div>
+      : null
+    )
     const topLevelClause = (
       <div className="grid-x">
         <div className="cell small-4">
-          <select onChange={this.props.completed}>
+          <select onChange={this.changedVal}>
             <option>Vertex</option>
             <option>Person</option>
             <option>Company</option>
@@ -36,13 +78,6 @@ class Subgraph extends Component {
             <option>dest</option>
           </select>
         </div>
-        <div className="cell small-12" style={{textAlign: "right"}}>
-        <button
-         className="button"
-         style={{marginTop: "1rem"}}
-         onClick={e => this.addFilter}
-         >Add filter</button>
-        </div>
       </div>
     )
 
@@ -57,6 +92,16 @@ class Subgraph extends Component {
                   <form>
                     {topLevelClause}
                   </form>
+                  <form>
+                    {filters}
+                  </form>
+                  <div className="cell small-12" style={{textAlign: "right"}}>
+                    <button
+                     className="button"
+                     style={{marginTop: "1rem"}}
+                     onClick={e => this.addFilter}
+                     >Add filter</button>
+                  </div>
                 </div>
               </div>
             </div>
