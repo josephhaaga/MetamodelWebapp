@@ -1,0 +1,30 @@
+SUBGRAPH {
+  Person as src
+  Company as dst
+}
+
+ONEHOP {
+  p1:Person employed_by Company
+  p2:Person employed_by Company
+  INSERT p1 WORKS_WITH p2
+}
+
+
+
+interface-driven code generation for graph transforms
+- exemplify UX
+  - are all the analyst's requirements captured?
+- prove it can be done (code gen.)
+
+
+Label each step and operation
+- user enters comments/label on step
+- User can enter hashtags on the overall pipeline
+  - and on each step
+
+
+Add tags/comments for semantic labelling of pipelines/steps
+- documentation generation
+
+
+Community Detection
