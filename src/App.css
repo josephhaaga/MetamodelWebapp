@@ -154,3 +154,97 @@
 .logic, .inputs form select.logic {
   background: #8c8c8c;
 }
+
+
+
+/* MotifBuilder styles START */
+.vis-network {
+  overflow: hidden;
+}
+
+.small-cell-block-y {
+  position: relative;
+}
+.sidebar {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  padding-right: 1rem;
+  overflow-y: scroll;
+}
+
+.sidebar .filters {
+  list-style-type: none;
+}
+.sidebar .filters select {
+  font-size: 12px;
+}
+
+select {
+  border: none;
+  border-bottom: 1px solid gray;
+  background: none;
+  padding-right: 0;
+  width: auto;
+  padding: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+select:focus {
+  border: none;
+  border-bottom: 2px solid lightblue;
+  box-shadow: -1px 8px 5px -5px #cacaca;
+  background: transparent;
+}
+
+
+.filter-list {
+  list-style-type: none;
+  background: #2f79df;
+  margin: 0;
+  opacity: 0.3;
+  color: white;
+  transition: 0.2s all;
+  font-size: 12px;
+}
+
+.filter-list:hover {
+  opacity: 0.9;
+}
+
+.sidebar .entity {
+  padding: 1rem;
+}
+
+.sidebar .entity .cell.small-4{
+  overflow: hidden;
+}
+
+.sidebar .entity:nth-of-type(2n+1){
+  background: #f2f2f2;
+}
+
+.sidebar .entity > .grid-x {
+  align-items: baseline;
+  position: relative;
+}
+
+.sidebar .entity > .grid-x > .cell {
+  position: relative;
+}
+
+.sidebar .delete {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.sidebar .delete-filter {
+  position: absolute;
+  left: -20px;
+  top: 50%;
+  transform: translate(0,-100%);
+}
+/* MotifBuilder styles END */

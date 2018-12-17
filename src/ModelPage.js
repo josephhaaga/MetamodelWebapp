@@ -159,17 +159,17 @@ class ModelPage extends Component {
             </div>
             <h2>Step {this.state.step + 1}: {theTitle}</h2>
           </div>
-          <div className="cell medium-4">
+          <div className="cell medium-3">
             <img
              src={oldGraphUrl}
              style={{width: "100%"}} />
           </div>
-          <div className="cell medium-4">
+          <div className="cell medium-6">
             <div className="the-code">
               {leftHandSide}
             </div>
           </div>
-          <div className="cell medium-4">
+          <div className="cell medium-3">
             <img
              src={newGraphUrl}
              style={{width: "100%"}} />

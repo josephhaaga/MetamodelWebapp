@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { OneHop } from './OneHop';
 import { Subgraph } from './Subgraph';
+import { MotifBuilder } from './MotifBuilder.js'
 
 class NewStepDialogue extends Component {
   constructor(props){
     super(props)
     this.setActive = this.setActive.bind(this)
+    this.motifSubmitted = this.motifSubmitted.bind(this)
     this.doOperation = this.doOperation.bind(this)
     this.data = [
       {
@@ -62,6 +64,12 @@ class NewStepDialogue extends Component {
       this.setState({newOperationSelected: false})
     }
   }
+
+  motifSubmitted(theQuery){
+    console.log("Motif pattern submitted:");
+    console.log(JSON.parse(theQuery));
+  }
+
   render(){
     const doOperation = this.doOperation;
     const activeIdx = this.state.active
@@ -89,7 +97,8 @@ class NewStepDialogue extends Component {
 
     const operation = ((this.state.newOperationSelected === 'Subgraph')
       ? <Subgraph name="Subgraph" completed={this.props.completedSubgraph} />
-      : <OneHop name="One-Hop" completed={this.props.completedOnehop}/>
+      // : <OneHop name="One-Hop" completed={this.props.completedOnehop}/>
+      : <MotifBuilder submit={this.motifSubmitted} />
     )
 
     const newStep = ((this.state.newOperationSelected)
